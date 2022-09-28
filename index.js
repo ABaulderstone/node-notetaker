@@ -3,6 +3,7 @@ const {
   inputRegisterDetails,
   inputLoginDetails,
 } = require('./inputs');
+
 const { users, registerUser, loginUser } = require('./db');
 
 let loggedInUser = null;
@@ -27,11 +28,17 @@ let loggedInUser = null;
         }
         break;
       case 3:
-        console.log(users);
+        if (!loggedInUser) {
+          console.log('You must be logged in to do that');
+        } else {
+          loggedInUser.notes.forEach((note) => console.log(note));
+        }
         break;
       case 4:
-        process.exit();
+        console.log('Add notes');
         break;
+      case 5:
+        process.exit();
       default:
         console.log('Unrecognised input');
     }

@@ -23,8 +23,12 @@ const mainMenuSelect = async () => {
         value: 3,
       },
       {
-        title: 'Exit',
+        title: 'Add a note',
         value: 4,
+      },
+      {
+        title: 'Exit',
+        value: 5,
       },
     ],
   });
