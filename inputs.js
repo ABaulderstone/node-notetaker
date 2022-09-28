@@ -1,4 +1,5 @@
 const prompts = require('prompts');
+const { passwordValidation } = require('./validations');
 
 const mainMenuSelect = async () => {
   const choice = await prompts({
@@ -38,7 +39,7 @@ const inputRegisterDetails = async () => {
     type: 'password',
     name: 'password',
     message: 'Enter a password:',
-    validate: (string) => string.length > 5,
+    validate: passwordValidation,
   });
   return { username, password };
 };
