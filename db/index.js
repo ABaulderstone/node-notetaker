@@ -14,6 +14,23 @@ const registerUser = async (details) => {
   updateDb();
 };
 
-const findUser = async () => {};
+const findUser = (username) => {
+  return users.find((user) => user.username === username);
+};
 
-module.exports = { users, registerUser };
+const matchPassword = (user, pass) => {
+  return user?.password === pass;
+};
+
+const loginUser = (userDetails) => {
+  const { username, password } = userDetails;
+  const user = findUser(username);
+  const validPassword = matchPassword(user, password);
+
+  if (!validPassword) {
+    throw new Error('Incorrect Username or password');
+  }
+  return user;
+};
+
+module.exports = { users, registerUser, loginUser };

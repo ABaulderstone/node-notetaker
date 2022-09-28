@@ -1,4 +1,5 @@
 const { password } = require('prompts/dist/prompts');
+const { users } = require('./db');
 
 const passwordValidation = (str) => {
   if (str.length < 6) return 'Password must contain at least 6 characters';
@@ -7,4 +8,11 @@ const passwordValidation = (str) => {
   return true;
 };
 
-module.exports = { passwordValidation };
+const usernameRegisterValidation = (str) => {
+  if (users.some((user) => user.username === str))
+    return 'A user with that name already exists';
+
+  return true;
+};
+
+module.exports = { passwordValidation, usernameRegisterValidation };

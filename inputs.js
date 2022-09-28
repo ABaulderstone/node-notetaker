@@ -1,5 +1,8 @@
 const prompts = require('prompts');
-const { passwordValidation } = require('./validations');
+const {
+  passwordValidation,
+  usernameRegisterValidation,
+} = require('./validations');
 
 const mainMenuSelect = async () => {
   const choice = await prompts({
@@ -34,6 +37,7 @@ const inputRegisterDetails = async () => {
     type: 'text',
     name: 'username',
     message: 'Enter a username:',
+    validate: usernameRegisterValidation,
   });
   const { password } = await prompts({
     type: 'password',
@@ -44,4 +48,18 @@ const inputRegisterDetails = async () => {
   return { username, password };
 };
 
-module.exports = { mainMenuSelect, inputRegisterDetails };
+const inputLoginDetails = async () => {
+  const { username } = await prompts({
+    type: 'text',
+    name: 'username',
+    message: 'Enter your username:',
+  });
+  const { password } = await prompts({
+    type: 'password',
+    name: 'password',
+    message: 'Enter your password:',
+  });
+  return { username, password };
+};
+
+module.exports = { mainMenuSelect, inputRegisterDetails, inputLoginDetails };

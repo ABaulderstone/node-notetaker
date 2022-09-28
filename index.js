@@ -1,6 +1,11 @@
-const { mainMenuSelect, inputRegisterDetails } = require('./inputs');
-const { users, registerUser } = require('./db');
+const {
+  mainMenuSelect,
+  inputRegisterDetails,
+  inputLoginDetails,
+} = require('./inputs');
+const { users, registerUser, loginUser } = require('./db');
 
+let loggedInUser = null;
 (async () => {
   while (true) {
     switch (await mainMenuSelect()) {
@@ -11,7 +16,15 @@ const { users, registerUser } = require('./db');
 
         break;
       case 2:
-        console.log('Sign In');
+        while (true) {
+          try {
+            const details = await inputLoginDetails();
+            loggedInUser = loginUser(details);
+            break;
+          } catch (e) {
+            console.log(e.message);
+          }
+        }
         break;
       case 3:
         console.log(users);
