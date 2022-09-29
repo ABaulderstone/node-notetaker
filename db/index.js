@@ -33,4 +33,10 @@ const loginUser = (userDetails) => {
   return user;
 };
 
-module.exports = { users, registerUser, loginUser };
+const updateNotes = (user, note) => {
+  const index = users.findIndex((dbUser) => dbUser.username === user.username);
+  users[index].notes.push(note);
+  updateDb();
+};
+
+module.exports = { users, registerUser, loginUser, updateNotes };

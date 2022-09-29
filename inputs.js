@@ -1,4 +1,5 @@
 const prompts = require('prompts');
+const { text } = require('prompts/dist/prompts');
 const {
   passwordValidation,
   usernameRegisterValidation,
@@ -66,4 +67,18 @@ const inputLoginDetails = async () => {
   return { username, password };
 };
 
-module.exports = { mainMenuSelect, inputRegisterDetails, inputLoginDetails };
+const inputNote = async () => {
+  const { note } = await prompts({
+    type: 'text',
+    name: 'note',
+    message: 'Enter a note',
+  });
+  return note;
+};
+
+module.exports = {
+  mainMenuSelect,
+  inputRegisterDetails,
+  inputLoginDetails,
+  inputNote,
+};

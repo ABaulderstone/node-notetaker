@@ -2,11 +2,12 @@ const {
   mainMenuSelect,
   inputRegisterDetails,
   inputLoginDetails,
+  inputNote,
 } = require('./inputs');
 
-const { users, registerUser, loginUser } = require('./db');
+const { users, registerUser, loginUser, updateNotes } = require('./db');
 
-let loggedInUser = null;
+let loggedInUser;
 (async () => {
   while (true) {
     switch (await mainMenuSelect()) {
@@ -36,6 +37,12 @@ let loggedInUser = null;
         break;
       case 4:
         console.log('Add notes');
+        if (!loggedInUser) {
+          console.log('You must be logged in to do that');
+        } else {
+          const note = await inputNote();
+          updateNotes(loggedInUser, note);
+        }
         break;
       case 5:
         process.exit();
