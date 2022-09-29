@@ -11,7 +11,7 @@ const updateDb = () => {
 
 const registerUser = async (details) => {
   const { username, password } = details;
-  const encryptedPass = encryptPassword(password);
+  const encryptedPass = await encryptPassword(password);
   const newUser = { username, password: encryptedPass, notes: [] };
   users.push(newUser);
   updateDb();
