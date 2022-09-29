@@ -3,6 +3,7 @@ const {
   inputRegisterDetails,
   inputLoginDetails,
   inputNote,
+  inputAnyKey,
 } = require('./inputs');
 
 const { users, registerUser, loginUser, updateNotes } = require('./db');
@@ -18,13 +19,15 @@ let loggedInUser;
 
         break;
       case 2:
-        while (true) {
+        let attemps = 0;
+        while (attemps < 3) {
           try {
             const details = await inputLoginDetails();
             loggedInUser = loginUser(details);
             break;
           } catch (e) {
             console.log(e.message);
+            attemps++;
           }
         }
         break;
@@ -48,5 +51,7 @@ let loggedInUser;
       default:
         console.log('Unrecognised input');
     }
+    await inputAnyKey();
+    console.clear();
   }
 })();

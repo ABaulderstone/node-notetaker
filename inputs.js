@@ -76,9 +76,18 @@ const inputNote = async () => {
   return note;
 };
 
+const inputAnyKey = async () => {
+  const { value } = await prompts({
+    type: 'text',
+    message: 'Press enter to go back:',
+    name: 'value',
+  });
+};
+
 module.exports = {
   mainMenuSelect,
   inputRegisterDetails,
   inputLoginDetails,
   inputNote,
+  inputAnyKey,
 };
