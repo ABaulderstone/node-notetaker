@@ -36,7 +36,6 @@ let loggedInUser;
         }
         break;
       case 4:
-        console.log('Add notes');
         if (!loggedInUser) {
           console.log('You must be logged in to do that');
         } else {

@@ -1,5 +1,6 @@
 const db = require('./db.json');
 const fs = require('fs');
+const { comparePassword, encryptPassword } = require('./password-utils');
 const { users } = db;
 
 const updateDb = () => {
@@ -9,7 +10,9 @@ const updateDb = () => {
 };
 
 const registerUser = async (details) => {
-  const newUser = { ...details, notes: [] };
+  const { username, password } = details;
+  const encryptedPass = encryptPassword(password);
+  const newUser = { username, password: encryptedPass, notes: [] };
   users.push(newUser);
   updateDb();
 };
@@ -19,7 +22,8 @@ const findUser = (username) => {
 };
 
 const matchPassword = (user, pass) => {
-  return user?.password === pass;
+  if (!user) return false;
+  return comparePassword(pass, user.password);
 };
 
 const loginUser = (userDetails) => {
