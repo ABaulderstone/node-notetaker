@@ -26,10 +26,10 @@ const matchPassword = (user, pass) => {
   return comparePassword(pass, user.password);
 };
 
-const loginUser = (userDetails) => {
+const loginUser = async (userDetails) => {
   const { username, password } = userDetails;
   const user = findUser(username);
-  const validPassword = matchPassword(user, password);
+  const validPassword = await matchPassword(user, password);
 
   if (!validPassword) {
     throw new Error('Incorrect Username or password');
